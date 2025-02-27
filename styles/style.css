@@ -89,6 +89,11 @@ strong{
     background-color: #272727;
 }
 
+.presentacion__contenido__texto a{
+    text-decoration: none;
+    color: #22D4FD;
+}
+
 .footer{
     background-color: #22D4FD;
     padding: 24px;
