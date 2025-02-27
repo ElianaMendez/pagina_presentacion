@@ -3,7 +3,7 @@
 :root{
     --color-primario: #000000;
     --color-secundario: #F6F6F6;
-    --color-terciario: #22D4FD;
+    --color-terciario: #22D4FD; /*#DEAA79*/
     --color-hover: #272727; 
 
     --fuente-monserrat: "Montserrat", serif;
