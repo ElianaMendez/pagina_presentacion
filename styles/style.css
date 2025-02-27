@@ -39,7 +39,7 @@ strong{
 .presentacion {
     display: flex;
     align-items: center;
-    padding: 6% 15%;
+    padding: 5% 15%;
     justify-content: space-between;
 }
 
