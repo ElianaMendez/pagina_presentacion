@@ -123,6 +123,12 @@ p{
 .servicios{
     text-align: center;
     margin-top: 25px;
+}
+
+.subtitulo{
+    color: var(--color-terciario);
+    font-size: 2rem;
+    margin-bottom: 25px;
     
 }
 
