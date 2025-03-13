@@ -92,7 +92,6 @@ strong{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-
 }
 
 .presentacion__contenido__titulo {
@@ -104,8 +103,25 @@ strong{
     text-align: center;
 }
 
+#button_agenda {    
+        background: var(--color-terciario); /* Azul vibrante */
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 25px;
+        transition: 0.3s ease-in-out;
+}
+    
 p{
     margin-bottom: 20px;
+}
+
+.redes_sociales{
+    margin-top: 40px;
 }
 
 .presentacion__contenido__texto{
