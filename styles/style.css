@@ -3,8 +3,9 @@
 :root{
     --color-primario: #000000;
     --color-secundario: #f6f6f6;
-    --color-terciario: #DF9755; /*#DEAA79*/
-    --color-hover: #272727; 
+    --color-terciario: #DF9755;
+    --color-hover: #272727;
+    --color-section: #F8F2DE;
 
     --fuente-monserrat: "Montserrat", serif;
     --fuente-krona: "Krona One", serif;
@@ -103,7 +104,7 @@ strong{
     text-align: center;
 }
 
-#button_agenda {    
+.boton{    
         background: var(--color-terciario); /* Azul vibrante */
         color: white;
         border: none;
@@ -117,7 +118,11 @@ strong{
 }
     
 p{
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+#leyenda{
+    color:var(--color-primario)    
 }
 
 .servicios{
@@ -129,6 +134,7 @@ p{
     color: var(--color-terciario);
     font-size: 2rem;
     margin-bottom: 25px;
+    margin-top: 80px;
 
 }
 
@@ -159,10 +165,38 @@ p{
     width: 40 px;
 }
 
+.garantia{
+    background-color: var(--color-section);
+    background-image:  radial-gradient(var(--color-terciario) 0.5px, transparent 0.5px), radial-gradient(var(--color-terciario) 0.5px, var(--color-section) 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0,10px 10px;
+    overflow: hidden;
+    margin-top: 80px;    
+}
 
+.garantia_servicios{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    align-items: center;
+}
+
+.garantia_picture{
+    max-width: 400px;
+}
+
+
+.garantia_img{
+    width: 100%;
+    display: block;
+}
+
+#conoce{
+    text-decoration: none;
+}
 
 .redes_sociales{
-    margin-top: 40px;
+    margin-top: 80px;
 }
 
 .presentacion__contenido__texto{
@@ -211,10 +245,11 @@ p{
 
 .footer{
     background-color: var(--color-terciario);
-    padding: 1.5rem;
+    padding: 15px 0px 15px 0px;
     color: var(--color-primario);
     text-align: center;
     font-family: var(--fuente-monserrat);
+    margin-top: 80px;
 }
 
 .presentacion__enlaces__subtitulos{
