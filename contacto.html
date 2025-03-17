@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h2>Registra tus datos</h2>
+
+    <form id="appointment-form">
+        <label>Nombres:</label>
+        <input type="text" id="first-name" required>
+
+        <label>Apellidos:</label>
+        <input type="text" id="last-name" required>
+
+        <label>Correo:</label>
+        <input type="email" id="email" required>
+
+        <label>Teléfono:</label>
+        <input type="tel" id="phone" required>
+
+        <label>Servicio:</label>
+        <select id="service">
+            <option value="QA/QC de software">QA/QC de software</option>
+            <option value="Automatización de Procesos">Automatización de Procesos</option>
+            <option value="Machine Learning">Machine Learning</option>
+        </select>
+
+        <label>Comentarios:</label>
+        <textarea id="comments"></textarea>
+
+        <h3>Fecha y Hora Seleccionadas</h3>
+        <p id="selected-date-time"></p>
+
+        <button type="submit">Agendar una cita</button>
+    </form>
+
+    <script src="contact.js"></script>
+</body>
+</html>
+

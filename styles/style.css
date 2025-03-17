@@ -187,7 +187,7 @@ body {
     margin-top: 10px;
 }
 
-#save-appointment{
+#continue-to-form{
     background: var(--color-terciario); /* Azul vibrante */
     color: white;
     border: none;

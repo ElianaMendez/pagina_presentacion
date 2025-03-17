@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-btn');
     const datePicker = document.getElementById('date-picker');
     const timeSlotsContainer = document.getElementById('time-slots');
-    const saveAppointmentBtn = document.getElementById('save-appointment');
-    const appointmentsList = document.getElementById('appointments-list');
+    const continueToFormBtn = document.getElementById('continue-to-form');
 
     let appointments = []; // Lista de citas
     let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]; // Horas disponibles
@@ -21,12 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarContainer.classList.add('hidden');
     });
 
-    // Función para generar horarios disponibles
+    // Generar horarios disponibles
     function generateTimeSlots() {
-        timeSlotsContainer.innerHTML = ""; // Limpiar antes de generar
-        let selectedDate = datePicker.value; // Obtener la fecha seleccionada
+        timeSlotsContainer.innerHTML = "";
+        let selectedDate = datePicker.value;
 
-        // Filtrar horarios ocupados
         let bookedHours = appointments
             .filter(appt => appt.fecha === selectedDate)
             .map(appt => appt.hora);
@@ -36,13 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
             timeSlot.classList.add("time-slot");
             timeSlot.textContent = hour;
 
-            // Verificar si la hora ya está ocupada
             if (bookedHours.includes(hour)) {
                 timeSlot.classList.add("disabled");
                 timeSlot.style.backgroundColor = "#ccc";
                 timeSlot.style.cursor = "not-allowed";
             } else {
-                // Si la hora está disponible, permitir selección
                 timeSlot.addEventListener("click", function() {
                     document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
                     timeSlot.classList.add("selected");
@@ -54,13 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Detectar cuando se cambia la fecha y actualizar horarios
+    // Actualizar horarios al cambiar la fecha
     datePicker.addEventListener('change', function() {
         generateTimeSlots();
     });
 
-    // Guardar la cita
-    saveAppointmentBtn.addEventListener('click', function() {
+    // Redirigir al formulario con la fecha y hora seleccionadas
+    continueToFormBtn.addEventListener('click', function() {
         let selectedDate = datePicker.value;
 
         if (!selectedDate || !selectedTime) {
@@ -68,18 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Guardar la cita
-        let appointment = { fecha: selectedDate, hora: selectedTime };
-        appointments.push(appointment);
-
-        // Mostrar la cita en la lista
-        let listItem = document.createElement("li");
-        listItem.textContent = `📅 ${appointment.fecha} ⏰ ${appointment.hora}`;
-        appointmentsList.appendChild(listItem);
-
-        console.log("Citas guardadas:", appointments);
-
-        // Actualizar los horarios disponibles en la fecha seleccionada
-        generateTimeSlots();
+        // Redirigir a contacto.html pasando la fecha y hora como parámetros
+        window.location.href = `contacto.html?fecha=${selectedDate}&hora=${selectedTime}`;
     });
 });
