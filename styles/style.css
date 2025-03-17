@@ -116,7 +116,92 @@ strong{
         margin-top: 25px;
         transition: 0.3s ease-in-out;
 }
-    
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+
+#calendar-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-section);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para la "X" de cerrar */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--color-terciario);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+/* Estilos de las horas disponibles */
+.time-slot {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--color-terciario);
+    color: var(--color-terciario);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.time-slot.selected {
+    background-color: var(--color-terciario);
+    color: white;
+}
+
+.time-slot.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#fecha-hora{
+    color:var(--color-terciario);
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#save-appointment{
+    background: var(--color-terciario); /* Azul vibrante */
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#date-picker{
+    margin-top: 18px;
+    border-radius: 5px;
+}
+
+
 p{
     margin-bottom: 40px;
 }

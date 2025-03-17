@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio</title>
     <link rel="stylesheet" href="./styles/style.css">
-
+    <script src="funciones.js"></script>
 </head>
+
 <body>
+
+   
     <header class="header">
         <img class="logo_principal" src="./assets/Logo.png" alt="logo_principal">
         <nav class="header_menu">
@@ -28,9 +31,24 @@
             Lleva tu negocio digital al siguiente nivel con un 
             <strong class= "titulo-destaque">experto en QA, automatización y análisis de datos!</strong>
             </h1>
-            <button class="boton" id="button_agenda" onclick="agendar"()>Agenda una consulta</button>
+            <button class="boton" id="open-calendar">Agenda una consulta</button>
     </section>
-    
+
+    <div id="calendar-container" class="hidden">
+        <button class="close-btn">x</button>
+        <h2 id="fecha-hora">Selecciona una fecha y hora</h2>
+        <input type="date" id="date-picker">
+        
+        <h3>Horas disponibles:</h3>
+        <div id="time-slots"></div>
+
+        <button id="save-appointment">Guardar Cita</button>
+    </div>
+
+    <h2>Citas Agendadas</h2>
+    <ul id="appointments-list"></ul>
+
+
     <section class="servicios">
         <section class="container_servicios">
             <h2 class="subtitulo">Nuestros Servicios</h2>
