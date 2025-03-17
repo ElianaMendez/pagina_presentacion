@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Cita Agendada:", formData);
         alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.`);
-        
         // Aquí podrías enviar los datos a un backend o almacenarlos localmente.
+        window.location.href = "index.html"; // Redirigir después de agendar
     });
 });
