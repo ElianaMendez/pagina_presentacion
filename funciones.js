@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeSlotsContainer = document.getElementById('time-slots');
     const continueToFormBtn = document.getElementById('continue-to-form');
 
-    let appointments = []; // Lista de citas
-    let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]; // Horas disponibles
+    let appointments = []; // Lista de citas (puedes conectar a una base de datos si lo necesitas)
+    let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]; // Horarios disponibles
     let selectedTime = ""; // Hora seleccionada
 
-    // Mostrar el calendario
+    // Mostrar el calendario al hacer clic en el botón
     openCalendarBtn.addEventListener('click', function() {
         calendarContainer.classList.remove('hidden');
     });
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarContainer.classList.add('hidden');
     });
 
-    // Generar horarios disponibles
+    // Generar horarios disponibles al seleccionar una fecha
     function generateTimeSlots() {
         timeSlotsContainer.innerHTML = "";
         let selectedDate = datePicker.value;
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Actualizar horarios al cambiar la fecha
+    // Actualizar los horarios al cambiar la fecha
     datePicker.addEventListener('change', function() {
         generateTimeSlots();
     });
 
-    // Redirigir al formulario con la fecha y hora seleccionadas
+    // Redirigir a contacto.html con la fecha y hora seleccionadas
     continueToFormBtn.addEventListener('click', function() {
         let selectedDate = datePicker.value;
 
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Redirigir a contacto.html pasando la fecha y hora como parámetros
         window.location.href = `contacto.html?fecha=${selectedDate}&hora=${selectedTime}`;
     });
 });
+
