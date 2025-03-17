@@ -3,43 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Contacto</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Agendar Cita</title>
+    <link rel="stylesheet" href="./styles/contacto.css">
 </head>
 <body>
 
-    <h2>Registra tus datos</h2>
+    <div class="container">
+        <h1>Agendar una Cita</h1>
+        
+        <div class="info-cita">
+            <p><strong>Fecha seleccionada:📅</strong> <span id="selected-date">-</span></p>
+            <p><strong>Hora seleccionada:⏰</strong> <span id="selected-time">-</span></p>
+        </div>
 
-    <form id="appointment-form">
-        <label>Nombres:</label>
-        <input type="text" id="first-name" required>
+        <form id="appointment-form">
+            <div class="form-group">
+                <label for="nombre">Nombres</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
 
-        <label>Apellidos:</label>
-        <input type="text" id="last-name" required>
+            <div class="form-group">
+                <label for="apellido">Apellidos</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
 
-        <label>Correo:</label>
-        <input type="email" id="email" required>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
 
-        <label>Teléfono:</label>
-        <input type="tel" id="phone" required>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
 
-        <label>Servicio:</label>
-        <select id="service">
-            <option value="QA/QC de software">QA/QC de software</option>
-            <option value="Automatización de Procesos">Automatización de Procesos</option>
-            <option value="Machine Learning">Machine Learning</option>
-        </select>
+            <div class="form-group">
+                <label for="servicio">Servicio</label>
+                <select id="servicio" name="servicio" required>
+                    <option value="" disabled selected>Selecciona un servicio</option>
+                    <option value="qa_qc">QA/QC de Software</option>
+                    <option value="automatizacion">Automatización de Procesos</option>
+                    <option value="ml">Machine Learning</option>
+                </select>
+            </div>
 
-        <label>Comentarios:</label>
-        <textarea id="comments"></textarea>
+            <div class="form-group">
+                <label for="comentarios">Comentarios</label>
+                <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+            </div>
 
-        <h3>Fecha y Hora Seleccionadas</h3>
-        <p id="selected-date-time"></p>
+            <button type="submit" class="btn">Agendar una cita</button>
+        </form>
+    </div>
 
-        <button type="submit">Agendar una cita</button>
-    </form>
-
-    <script src="contact.js"></script>
+    <script src="contacto.js"></script>
 </body>
 </html>
-
