@@ -11,20 +11,60 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellido = document.getElementById("apellido").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const servicio = document.getElementById("servicio").value;
+        const comentarios = document.getElementById("comentarios").value.trim();
+
+        // Expresiones regulares para validaciones
+        const regexTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; // Solo letras y espacios
+        const regexTelefono = /^[0-9]{7,10}$/; // Solo números, mínimo 7 y máximo 10
+
+        // Validación de campos
+        if (!nombre || !regexTexto.test(nombre)) {
+            alert("Por favor, ingresa un nombre válido (solo letras y tildes).");
+            return;
+        }
+        if (!apellido || !regexTexto.test(apellido)) {
+            alert("Por favor, ingresa un apellido válido (solo letras y tildes).");
+            return;
+        }
+        if (!correo || !correo.includes("@")) {
+            alert("Por favor, ingresa un correo válido.");
+            return;
+        }
+        if (!telefono || !regexTelefono.test(telefono)) {
+            alert("Por favor, ingresa un número de teléfono válido (7 a 10 dígitos numéricos).");
+            return;
+        }
+        if (!servicio) {
+            alert("Por favor, selecciona un servicio.");
+            return;
+        }
+
         const formData = {
-            nombre: document.getElementById("nombre").value,
-            apellido: document.getElementById("apellido").value,
-            correo: document.getElementById("correo").value,
-            telefono: document.getElementById("telefono").value,
-            servicio: document.getElementById("servicio").value,
-            comentarios: document.getElementById("comentarios").value,
-            fecha: fecha,
-            hora: hora
+            nombre,
+            apellido,
+            correo,
+            telefono,
+            servicio,
+            comentarios,
+            fecha,
+            hora
         };
 
         console.log("Cita Agendada:", formData);
+
+        // Guardar en LocalStorage (opcional)
+        let citas = JSON.parse(localStorage.getItem("citas")) || [];
+        citas.push(formData);
+        localStorage.setItem("citas", JSON.stringify(citas));
+
         alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.`);
-        // Aquí podrías enviar los datos a un backend o almacenarlos localmente.
-        window.location.href = "index.html"; // Redirigir después de agendar
+
+        // Redirigir después de agendar
+        window.location.href = "index.html";
     });
 });
