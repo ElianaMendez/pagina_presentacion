@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Citas</title>
+    <link rel="stylesheet" href="./styles/admin.css">
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+    <div id="citas-lista"></div>
+    <button id="borrar-citas">Borrar Todas las Citas</button>
+
+    <script>
+        let password = prompt("Ingrese la contraseña de administrador:");
+        if (password !== "12345") {
+            alert("Acceso denegado");
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <script src="./scripts/admin.js"></script>
+</body>
+</html>
