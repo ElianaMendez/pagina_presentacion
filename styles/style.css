@@ -97,15 +97,16 @@ strong{
 
 .presentacion__contenido__titulo {
     font-size: 2rem;
-    font-weight: 600;
-    font-family: var(--fuente-krona);
+    font-weight: 800;
+    font-family: var(--fuente-monserrat);
     padding: 0px 30px 0px 30px;
     margin-bottom: 20px;
     text-align: center;
 }
 
 .boton{    
-        background: var(--color-terciario); /* Azul vibrante */
+        background: var(--color-terciario);
+        font-family: var(--fuente-monserrat);
         color: white;
         border: none;
         padding: 15px 30px;
@@ -115,6 +116,12 @@ strong{
         cursor: pointer;
         margin-top: 25px;
         transition: 0.3s ease-in-out;
+        text-transform: uppercase;        
+}
+
+.boton:hover{
+    background-color: #DF6D14;
+
 }
 
 body {
@@ -220,11 +227,17 @@ p{
     font-size: 2rem;
     margin-bottom: 25px;
     margin-top: 80px;
+    font-weight: bold;
 
 }
 
 .leyenda_servicios{
-    line-height: 1.7;
+    line-height: 1.15;
+    font-size: 20px;
+}
+
+li{
+    margin-bottom: 20px;
 }
 
 .info_servicios{
@@ -264,6 +277,21 @@ p{
     grid-template-columns: 1fr 1fr;
     gap: 1em;
     align-items: center;
+}
+
+.lista_servicios{
+    color: var(--color-primario);
+}
+
+.item_lista{
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    border-radius: 5px
+
+}
+
+#promesa{
+    color: var(--color-primario);
 }
 
 .garantia_picture{

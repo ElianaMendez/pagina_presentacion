@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="es-mx">
+
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio</title>
     <link rel="stylesheet" href="./styles/style.css">
     <script src="./scripts/index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
 <body>
 
-   
+
     <header class="header">
         <img class="logo_principal" src="./assets/Logo.png" alt="logo_principal">
         <nav class="header_menu">
@@ -21,24 +24,24 @@
                 <a class="header_menu_link" href="about.html">Sobre mi</a>
                 <a class="header_menu_link" href="blog.html">Blog</a>
                 <a class="header_menu_link" href="contacto.html">Contacto</a>
-            </div>        
+            </div>
         </nav>
 
     </header>
 
     <section class="presentacion__contenido">
-            <h1 class="presentacion__contenido__titulo">
-            Lleva tu negocio digital al siguiente nivel con un 
-            <strong class= "titulo-destaque">experto en QA, automatización y análisis de datos!</strong>
-            </h1>
-            <button class="boton" id="open-calendar">Agenda una consulta</button>
+        <h1 class="presentacion__contenido__titulo">
+            Lleva tu negocio digital al siguiente nivel con un
+            <strong class="titulo-destaque">experto en QA, automatización y análisis de datos!</strong>
+        </h1>
+        <button class="boton" id="open-calendar">Agenda una consulta</button>
     </section>
 
     <div id="calendar-container" class="hidden">
         <button class="close-btn">x</button>
         <h2 id="fecha-hora">Selecciona una fecha y hora</h2>
         <input type="date" id="date-picker">
-        
+
         <h3>Horas disponibles:</h3>
         <div id="time-slots"></div>
 
@@ -48,35 +51,63 @@
     <section class="servicios">
         <section class="container_servicios">
             <h2 class="subtitulo">Nuestros Servicios</h2>
-            <p class="leyenda_servicios">Recibe la asesoría que tu negocio necesita!. Agenda y 
-            conoce mejor nuestros servicios</p>
-             
+            <p class="leyenda_servicios">En un mundo donde la calidad y la eficiencia son clave para la competitividad,
+                ofrecemos soluciones avanzadas en QA/QC de Software, Automatización de Procesos y Machine Learning.
+                Combinamos experiencia, tecnología y metodologías ágiles para ayudarte a evolucionar en la era digital.
+            </p>
+            <p class="leyenda_servicios">Recibe la asesoría que tu negocio necesita!. Agenda y
+                conoce mejor nuestros servicios</p>
+
             <div class="info_servicios">
                 <article class="iconos">
                     <img src="./assets/icono_bug.png" class="icono_bug">
-                    <h3 class="titulo_icono_bug">QA/QA de Software</h3>
-                    <p class="parrago_servicios">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae velit eos pariatur itaque provident accusamus numquam autem consequatur, vitae accusantium tempora, id assumenda soluta quo quis, impedit magni aut ex.</p>
+                    <h3 class="titulo_icono_bug">QA/QC de Software</h3>
+                    <p class="parrafo_servicios">Garantizamos la calidad de tus aplicaciones con rigurosas estrategias
+                        de pruebas de software y aseguramiento de calidad, asegurando rendimiento, seguridad y
+                        confiabilidad.</p>
                 </article>
-                
+
                 <article class="iconos">
                     <img src="./assets/icono_bot.png" class="icono_bot">
                     <h3 class="titulo_icono_bot">Automatización de Procesos</h3>
-                    <p class="parrago_servicios">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae velit eos pariatur itaque provident accusamus numquam autem consequatur, vitae accusantium tempora, id assumenda soluta quo quis, impedit magni aut ex.</p>
-                </article>    
+                    <p class="parrafo_servicios">Optimizamos tus procesos mediante automatización inteligente,
+                        reduciendo costos operativos y aumentando la productividad con flujos de trabajo eficientes y
+                        escalables.
+                    </p>
+                </article>
 
                 <article class="iconos">
                     <img src="./assets/icono_machine.png" class="icono_machine">
                     <h3 class="titulo_icono_machine">Machine Learning</h3>
-                    <p class="parrago_servicios">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae velit eos pariatur itaque provident accusamus numquam autem consequatur, vitae accusantium tempora, id assumenda soluta quo quis, impedit magni aut ex.</p>
-                </article>            
+                    <p class="parrafo_servicios">Transformamos datos en decisiones con Machine Learning, aplicando
+                        modelos predictivos que potencian la toma de decisiones estratégicas y mejoran el rendimiento
+                        empresarial.</p>
+                </article>
             </div>
         </section>
 
         <section class="garantia">
             <div class="garantia_servicios">
                 <div class="garantia_texto">
-                    <h2 class="subtitulo">Beneficios</h2>
-                    <p id=leyenda class="leyenda_servicios">Lorem ipsum dolor sit amet consectetur adipisicing elit. At expedita dolore error magnam quos aliquid. Laborum magnam accusamus corporis iure repellat modi, voluptas sit provident possimus, inventore consequatur, quaerat sunt?</p>
+                    <h2 class="subtitulo">Beneficios: Tecnología Inteligente para Empresas Exitosas</h2>
+                    <p id=leyenda class="leyenda_servicios">La calidad, la eficiencia y la toma de decisiones basadas en
+                        datos son esenciales para el éxito empresarial. Con nuestros servicios de <strong>QA/QC de
+                            Software, Automatización de Procesos y Machine Learning</strong>, te ofrecemos:</p>
+                    <ul class="lista_servicios">
+                        <li class="item_lista"><i class="fas fa-check-circle" style="color: #DF9755;"></i><strong> Mayor calidad y confiabilidad:</strong> Garantizamos software libre de fallos, con
+                            alto rendimiento y seguridad, reduciendo riesgos y costos de corrección.</li>
+                        <li class="item_lista"><i class="fas fa-cogs" style="color: #DF9755;"></i><strong> Automatización para mayor eficiencia:</strong> Eliminamos tareas repetitivas y
+                            optimizamos procesos, permitiéndote ahorrar tiempo y recursos mientras aumentas la
+                            productividad.</li>
+                        <li class="item_lista"><i class="fas fa-chart-line" style="color: #DF9755;"></i><strong> Decisiones estratégicas con IA:</strong> Transformamos datos en información
+                            valiosa, ayudándote a anticipar tendencias, reducir riesgos y maximizar oportunidades de
+                            negocio.</li>
+                    </ul>
+                    <p id="promesa">
+                        <strong>📈 Nuestra promesa:</strong> Te ayudamos a innovar y escalar con soluciones tecnológicas
+                        diseñadas para maximizar la calidad, optimizar operaciones y potenciar el crecimiento
+                        empresarial.
+                    </p>
                     <a href="#" class="boton" id="conoce">Conoce Mas</a>
                 </div>
 
@@ -84,24 +115,25 @@
                     <img src="./assets/imagen_garantia.png" class="garantia_img">
                 </figure>
             </div>
-        </section>      
+        </section>
     </section>
 
     <section class="redes_sociales">
-            <div class="presentacion__enlaces"> 
-                <h2 class="presentacion__enlaces__subtitulos">Sìguenos en nuestras redes sociales:</h2>
-                <a class="presentacion__enlaces__link" href="https://instagram.com/">
-                    <img src="assets/logo_instagram_color_n.png"> Instagram
-                </a>                
-                <a class="presentacion__enlaces__link" href="https://github.com/">
-                    <img src="./assets/logo_github_color_n.png"> GitHub
-                </a>                
-            </div>
+        <div class="presentacion__enlaces">
+            <h2 class="presentacion__enlaces__subtitulos">Sìguenos en nuestras redes sociales:</h2>
+            <a class="presentacion__enlaces__link" href="https://instagram.com/">
+                <img src="assets/logo_instagram_color_n.png"> Instagram
+            </a>
+            <a class="presentacion__enlaces__link" href="https://github.com/">
+                <img src="./assets/logo_github_color_n.png"> GitHub
+            </a>
+        </div>
     </section>
-                    
+
     <footer class="footer">
         <P>&copy; AssureTech 2025</P>
         <p>Desarrollado por Eliana Méndez Marrugo</P>
     </footer>
 </body>
+
 </html>
