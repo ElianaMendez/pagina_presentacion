@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --color-primario: #000000;
     --color-secundario: #f6f6f6;
     --color-terciario: #DF9755;
@@ -18,13 +18,13 @@
 
 }
 
-body{
+body {
     background-color: var(--color-primario);
     color: var(--color-secundario);
     box-sizing: border-box;
 }
 
-.header{
+.header {
     display: flex;
     padding: 15px 50px;
     justify-content: space-between;
@@ -32,29 +32,29 @@ body{
 
 }
 
-.logo_principal{
+.logo_principal {
     height: 100px;
 
 }
 
-.header_menu{
+.header_menu {
     display: flex;
     gap: 20px;
 }
 
-header nav{
+header nav {
     display: flex;
     flex-direction: column;
     text-align: center;
     padding-bottom: 25px;
 }
 
-.right{
+.right {
     display: flex;
     gap: 80px;
 }
 
-.header_menu_link{
+.header_menu_link {
     font-family: var(--fuente-monserrat);
     font-size: 1.5rem;
     font-weight: 600;
@@ -62,11 +62,11 @@ header nav{
     text-decoration: none;
 }
 
-strong{
+strong {
     color: var(--color-terciario);
 }
 
-.titulo-destaque{
+.titulo-destaque {
     color: var(--color-terciario);
 }
 
@@ -85,11 +85,10 @@ strong{
     text-align: center;
     flex-direction: column;
     height: 90vh;
-    background-image:  linear-gradient(
-    0deg, 
-    rgba(0,0,0,0.5), 
-    rgba(0,0,0,0.5)),
-    url("/assets/imagen_fondo.jpg") ;
+    background-image: linear-gradient(0deg,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+        url("/assets/imagen_fondo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -104,22 +103,22 @@ strong{
     text-align: center;
 }
 
-.boton{    
-        background: var(--color-terciario);
-        font-family: var(--fuente-monserrat);
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-top: 25px;
-        transition: 0.3s ease-in-out;
-        text-transform: uppercase;        
+.boton {
+    background: var(--color-terciario);
+    font-family: var(--fuente-monserrat);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s ease-in-out;
+    text-transform: uppercase;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: #DF6D14;
 
 }
@@ -188,14 +187,15 @@ body {
     cursor: not-allowed;
 }
 
-#fecha-hora{
-    color:var(--color-terciario);
+#fecha-hora {
+    color: var(--color-terciario);
     font-size: 20px;
     margin-top: 10px;
 }
 
-#continue-to-form{
-    background: var(--color-terciario); /* Azul vibrante */
+#continue-to-form {
+    background: var(--color-terciario);
+    /* Azul vibrante */
     color: white;
     border: none;
     padding: 5px;
@@ -203,27 +203,23 @@ body {
     cursor: pointer;
 }
 
-#date-picker{
+#date-picker {
     margin-top: 18px;
     border-radius: 5px;
 }
 
-
-p{
-    margin-bottom: 40px;
+#leyenda {
+    color: var(--color-primario)
 }
 
-#leyenda{
-    color:var(--color-primario)    
-}
-
-.servicios{
+.servicios {
     text-align: center;
     margin-top: 80px;
 }
 
-.subtitulo{
+.subtitulo {
     color: var(--color-terciario);
+    font-family: var(--fuente-monserrat);
     font-size: 2rem;
     margin-bottom: 25px;
     margin-top: 80px;
@@ -231,26 +227,27 @@ p{
 
 }
 
-.leyenda_servicios{
+.leyenda_servicios {
     line-height: 1.15;
+    font-family: var(--fuente-monserrat);
     font-size: 20px;
 }
 
-li{
+li {
     margin-bottom: 20px;
 }
 
-.info_servicios{
+.info_servicios {
     padding-top: 80px;
     display: grid;
     width: 90%;
     margin: 0 auto;
     gap: 1em;
     overflow: hidden;
-    grid-template-columns: repeat(auto-fit,minmax(260px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(260px, auto));
 }
 
-.iconos{
+.iconos {
     display: grid;
     gap: 1em;
     justify-items: center;
@@ -259,76 +256,123 @@ li{
     margin: 0 auto;
 }
 
-.icono{
+.icono {
     width: 40 px;
 }
 
-.garantia{
+.titulo_icono_bug {
+    font-size: 23px;
+    font-family: var(--fuente-monserrat);
+}
+
+.titulo_icono_bot {
+    font-size: 23px;
+    font-family: var(--fuente-monserrat);
+}
+
+.titulo_icono_machine {
+    font-size: 23px;
+    font-family: var(--fuente-monserrat);
+}
+
+.parrafo_servicios {
+    font-size: 18px;
+    font-family: var(--fuente-monserrat);
+}
+
+.garantia {
     background-color: var(--color-section);
-    background-image:  radial-gradient(var(--color-terciario) 0.5px, transparent 0.5px), radial-gradient(var(--color-terciario) 0.5px, var(--color-section) 0.5px);
+    background-image: radial-gradient(var(--color-terciario) 0.5px, transparent 0.5px), radial-gradient(var(--color-terciario) 0.5px, var(--color-section) 0.5px);
     background-size: 20px 20px;
-    background-position: 0 0,10px 10px;
+    background-position: 0 0, 10px 10px;
     overflow: hidden;
-    margin-top: 80px;    
+    margin-top: 80px;
+
 }
 
-.garantia_servicios{
+.garantia_servicios {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-    align-items: center;
+    grid-template-columns: 1fr 1fr; /* Mantiene dos columnas */
+    gap: 2em;
+    align-items: stretch; /* Hace que ambas columnas tengan la misma altura */
 }
 
-.lista_servicios{
-    color: var(--color-primario);
-}
-
-.item_lista{
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 10px;
-    border-radius: 5px
-
-}
-
-#promesa{
-    color: var(--color-primario);
-}
-
-.garantia_picture{
-    max-width: 400px;
-}
-
-
-.garantia_img{
-    width: 100%;
-    display: block;
+.garantia_texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 70%; 
+    padding: 0px 5px 0px 30px;
 }
 
 #conoce{
     text-decoration: none;
+    width: 100%;
 }
 
-.redes_sociales{
+.lista_servicios {
+    color: var(--color-primario);
+}
+
+.item_lista {
+    background-color: rgba(0, 0, 0, 0.07);
+    padding: 10px;
+    border-radius: 8px;
+    font-family: var(--fuente-monserrat);
+
+}
+
+#promesa {
+    color: var(--color-primario);
+    font-family: var(--fuente-monserrat);
+
+}
+
+#promesa_resaltada {
+    font-weight: bold;
+}
+
+.garantia_picture {
+    max-width: 400px;
+}
+
+
+.garantia_img {
+    width: 100%;
+    display: block;
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    padding-top: 20px; /* Ajusta según sea necesario */
+}
+
+.redes_sociales {
     margin-top: 80px;
 }
 
-.presentacion__contenido__texto{
-    font-size: 1.5rem;
+.presentacion__contenido__texto {
+    font-size: 1.2rem;
     font-family: var(--fuente-monserrat);
     text-align: justify;
+    margin-bottom: 40px;
 }
 
-.presentacion__enlaces{
+.presentacion__enlaces {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
 
 }
 
-.presentacion__enlaces__link{
-    width: 50%;
+.presentacion__enlaces__link {
+    width: 25%;
     text-align: center;
     padding: 21.5px 0;
     border-radius: 8px;
@@ -343,48 +387,55 @@ li{
     gap: 10px;
 }
 
-.presentacion__enlaces__link:hover{
+.presentacion__enlaces__link:hover {
     background-color: var(--color-hover);
+
 }
 
-.presentacion_imagen{
+.presentacion_imagen {
     width: 35%;
 }
 
-.presentacion__contenido__texto a{
+.presentacion__contenido__texto a {
     text-decoration: none;
     color: var(--color-terciario);
 }
 
-.footer{
+footer {
     background-color: var(--color-terciario);
-    padding: 15px 0px 15px 0px;
+    padding: 15px 0 15px 0;
     color: var(--color-primario);
     text-align: center;
     font-family: var(--fuente-monserrat);
     margin-top: 80px;
+    min-height: 60px;
+    /* Define una altura mínima */
+    height: 30%;
+    /* Permite que el contenido determine la altura */
 }
 
-.presentacion__enlaces__subtitulos{
-    font-family: var(--fuente-krona);
+.presentacion__enlaces__subtitulos {
+    font-family: var(--fuente-monserrat);
     font-size: 1.5rem;
     font-weight: 400;
 }
 
-@media (max-width:1200px ) {
+@media (max-width:1200px) {
 
-    .header{
+    .header {
         padding: 10%;
     }
-    .header_menu{
-        justify-content: center;
-}
 
-    .presentacion{
+    .header_menu {
+        justify-content: center;
+    }
+
+    .presentacion {
         flex-direction: column-reverse;
         padding: 5%;
     }
-    .presentacion__contenido{
+
+    .presentacion__contenido {
         width: auto;
     }
 
