@@ -231,6 +231,7 @@ body {
     line-height: 1.15;
     font-family: var(--fuente-monserrat);
     font-size: 20px;
+    margin-top: 40px;
 }
 
 li {
@@ -292,20 +293,22 @@ li {
 
 .garantia_servicios {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Mantiene dos columnas */
+    grid-template-columns: 1fr 1fr;
+    /* Mantiene dos columnas */
     gap: 2em;
-    align-items: stretch; /* Hace que ambas columnas tengan la misma altura */
+    align-items: stretch;
+    /* Hace que ambas columnas tengan la misma altura */
 }
 
 .garantia_texto {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
-    height: 70%; 
+    justify-content: space-between;
+    height: 70%;
     padding: 0px 5px 0px 30px;
 }
 
-#conoce{
+#conoce {
     text-decoration: none;
     width: 100%;
 }
@@ -347,8 +350,10 @@ li {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: auto; /* Empuja el botón hacia abajo */
-    padding-top: 20px; /* Ajusta según sea necesario */
+    margin-top: auto;
+    /* Empuja el botón hacia abajo */
+    padding-top: 20px;
+    /* Ajusta según sea necesario */
 }
 
 .redes_sociales {
