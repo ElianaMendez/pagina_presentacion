@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init("De9vyTPv0M09Cuzo6"); // Se inicializa EmailJS con tu Public Key
+
     const params = new URLSearchParams(window.location.search);
     const fecha = params.get("fecha") || "No seleccionada";
     const hora = params.get("hora") || "No seleccionada";
@@ -11,11 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        // Obtener valores del formulario
         const nombre = document.getElementById("nombre").value.trim();
         const apellido = document.getElementById("apellido").value.trim();
         const correo = document.getElementById("correo").value.trim();
         const telefono = document.getElementById("telefono").value.trim();
-        const servicio = document.getElementById("servicio").value;
+        const servicio = document.getElementById("servicio").value.trim();
         const comentarios = document.getElementById("comentarios").value.trim();
 
         // Expresiones regulares para validaciones
@@ -44,27 +47,26 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const formData = {
-            nombre,
-            apellido,
-            correo,
-            telefono,
-            servicio,
-            comentarios,
-            fecha,
-            hora
-        };
+        const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora };
 
-        console.log("Cita Agendada:", formData);
-
-        // Guardar en LocalStorage (opcional)
+        // Guardar en LocalStorage
         let citas = JSON.parse(localStorage.getItem("citas")) || [];
         citas.push(formData);
         localStorage.setItem("citas", JSON.stringify(citas));
 
-        alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.`);
-
-        // Redirigir después de agendar
-        window.location.href = "index.html";
+        // Enviar correo con EmailJS
+        emailjs.send("service_lsjni3j", "template_rpyxsfl", {
+            name: formData.nombre,
+            email: formData.correo // correo del destinatario            
+        }, "De9vyTPv0M09Cuzo6") // Public Key
+            .then(function (response) {
+                console.log("Correo enviado con éxito:", response);
+                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}. Se ha enviado un correo de confirmación.`);
+                window.location.href = "index.html"; // Redirigir después del envío del correo
+            })
+            .catch(function (error) {
+                console.error("Error al enviar el correo:", error);
+                alert("Hubo un error al enviar la confirmación por correo.");
+            });
     });
 });
