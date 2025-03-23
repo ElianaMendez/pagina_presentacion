@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios | AssureTech</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <script src="./scripts/servicios.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </head>
 
@@ -82,7 +83,18 @@
 
     <section class="cta">
         <h2>¿Listo para transformar tu negocio?</h2>
-        <a href="contacto.html" class="boton">Agendar Consulta</a>
+        <button class="boton" id="open-calendar">Agenda una consulta</button>
+
+        <div id="calendar-container" class="hidden">
+            <button class="close-btn">x</button>
+            <h2 id="fecha-hora">Selecciona una fecha y hora</h2>
+            <input type="date" id="date-picker">
+    
+            <h3>Horas disponibles:</h3>
+            <div id="time-slots"></div>
+    
+            <button id="continue-to-form">Continuar</button>
+        </div>
     </section>
 
     <footer>
