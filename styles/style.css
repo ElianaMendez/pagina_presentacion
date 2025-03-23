@@ -56,7 +56,7 @@ header {
 }
 
 .nav-links a:hover {
-    color: #E6A15D; /* Cambia de color al pasar el mouse */
+    color: var(--color-terciario); /* Cambia de color al pasar el mouse */
 }
 
 .header_menu_link {
