@@ -116,6 +116,7 @@ strong {
     margin-top: 25px;
     transition: 0.3s ease-in-out;
     text-transform: uppercase;
+    text-decoration: none;
 }
 
 .boton:hover {
@@ -426,6 +427,120 @@ footer {
     font-family: var(--fuente-monserrat);
     font-size: 1.5rem;
     font-weight: 400;
+}
+
+.servicios-intro {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--color-section);
+    color: var(--color-terciario);
+    font-weight: bold; 
+}
+
+.titulo-servicios{
+    font-size: 30px;
+}
+
+.descripcion-servicios{
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+.parrafo-pagina-servicios{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.servicio-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono y el texto */
+}
+
+.servicio-detalle {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 50px 10%;
+}
+
+.servicio-detalle.reverse {
+    flex-direction: row-reverse;
+}
+
+.servicio-info {
+    flex: 1;
+}
+
+.servicio-detalle img {
+    width: 150px;
+}
+
+.servicio-info h2 {
+    font-size: 2rem;
+    color: var(--color-terciario);
+}
+
+.servicio-info p {
+    font-size: 1.2rem;
+}
+
+.servicio-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.servicio-info li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.servicio-info li i {
+    margin-right: 10px;
+    color: var(--color-terciario);
+}
+
+.cta {
+    text-align: center;
+    padding: 50px 0;
+    background-color: var(--color-section);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px; /* Espacio entre el texto y el botón */    
+}
+
+.cta h2 {
+    font-size: 2rem;
+    color: var(--color-terciario);
+}
+
+.boton {
+    background: var(--color-terciario);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.boton:hover {
+    background-color: #DF6D14;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .servicio-detalle {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 @media (max-width:1200px) {

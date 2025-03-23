@@ -1,11 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-mx">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Servicios | AssureTech</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </head>
+
 <body>
-    
+
+    <header class="header">
+        <img class="logo_principal" src="./assets/Logo.png" alt="logo_principal">
+        <nav class="header_menu">
+            <div class="right">
+                <a class="header_menu_link" href="index.html">Inicio</a>                
+                <a class="header_menu_link" href="about.html">Sobre nosotros</a>                
+            </div>
+        </nav>
+    </header>
+
+    <section class="servicios-intro">
+        <h1 class="titulo-servicios">Servicios Especializados para Empresas Exitosas</h1>
+        <p class="descripcion-servicios">
+            En AssureTech, nos especializamos en mejorar la calidad, eficiencia y precisión de los sistemas empresariales a través de soluciones innovadoras. Descubre cómo nuestros servicios pueden transformar tu negocio.
+        </p>
+    </section>
+
+    <!-- QA/QC de Software -->
+    <section class="servicio-detalle">
+        <img src="./assets/icono_bug.png" alt="QA/QC Software">
+        <div class="servicio-info">
+            <h2>QA/QC de Software</h2>
+            <p class="parrafo-pagina-servicios">
+                La calidad del software es clave para la satisfacción del usuario y la estabilidad del negocio. Aplicamos estrategias avanzadas de testing manual y automatizado para detectar fallos antes de que lleguen al usuario final.
+            </p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Pruebas funcionales, de rendimiento y seguridad.</li>
+                <li><i class="fas fa-check-circle"></i> Automatización de pruebas para ciclos de desarrollo más rápidos.</li>
+                <li><i class="fas fa-check-circle"></i> Identificación y prevención de errores críticos en producción.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Automatización de Procesos -->
+    <section class="servicio-detalle reverse">
+        <div class="servicio-info">
+            <h2>Automatización de Procesos</h2>
+            <p class="parrafo-pagina-servicios">
+                Reducimos la intervención manual en tareas repetitivas, optimizando la eficiencia de los flujos de trabajo en tu empresa. 
+                Implementamos herramientas de RPA (Robotic Process Automation) y scripts personalizados para procesos más eficientes.
+            </p>
+            <ul>
+                <li><i class="fas fa-robot"></i> Eliminación de tareas repetitivas y reducción de errores humanos.</li>
+                <li><i class="fas fa-robot"></i> Aumento de la productividad y eficiencia operativa.</li>
+                <li><i class="fas fa-robot"></i> Integración con software y plataformas empresariales.</li>
+            </ul>
+        </div>
+        <img src="./assets/icono_bot.png" alt="Automatización de Procesos">
+    </section>
+
+    <!-- Machine Learning -->
+    <section class="servicio-detalle">
+        <img src="./assets/icono_machine.png" alt="Machine Learning">
+        <div class="servicio-info">
+            <h2>Machine Learning</h2>
+            <p class="parrafo-pagina-servicios">
+                Aplicamos modelos predictivos para convertir datos en información accionable. Desde sistemas de recomendación hasta análisis de tendencias, potenciamos tu capacidad de tomar decisiones estratégicas basadas en datos.
+            </p>
+            <ul>
+                <li><i class="fas fa-chart-line"></i> Análisis predictivo para anticipar tendencias.</li>
+                <li><i class="fas fa-chart-line"></i> Modelos de inteligencia artificial para optimizar operaciones.</li>
+                <li><i class="fas fa-chart-line"></i> Implementación de chatbots y asistentes virtuales.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo para transformar tu negocio?</h2>
+        <a href="contacto.html" class="boton">Agendar Consulta</a>
+    </section>
+
+    <footer>
+        <p>&copy; AssureTech 2025</p>
+        <p>Desarrollado por Eliana Méndez Marrugo</p>
+    </footer>
+
 </body>
+
 </html>
