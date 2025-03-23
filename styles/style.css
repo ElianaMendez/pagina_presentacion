@@ -24,34 +24,39 @@ body {
     box-sizing: border-box;
 }
 
-.header {
+header {
     display: flex;
+    justify-content: space-between; /* Separa el logo y el menú */
+    align-items: center; /* Centra verticalmente */
     padding: 15px 50px;
-    justify-content: space-between;
-    align-items: center;
-
+    background-color: var(--color-primario); /* Color del fondo */
+    position: fixed; /* Fijar el header en la parte superior */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
 }
 
-.logo_principal {
-    height: 100px;
-
+.logo img {
+    height: 80px; /* Ajusta el tamaño del logo */
 }
 
-.header_menu {
+.nav-links {
     display: flex;
-    gap: 20px;
+    gap: 30px; /* Espacio entre los enlaces */
 }
 
-header nav {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding-bottom: 25px;
+.nav-links a {
+    text-decoration: none;
+    color: #F6F6F6; /* Color del texto */
+    font-weight: bold;
+    font-family: var(--fuente-monserrat);
+    font-size: 20px;
+    transition: color 0.3s;
 }
 
-.right {
-    display: flex;
-    gap: 80px;
+.nav-links a:hover {
+    color: #E6A15D; /* Cambia de color al pasar el mouse */
 }
 
 .header_menu_link {
@@ -125,7 +130,7 @@ strong {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--fuente-monserrat);
     text-align: center;
 }
 
@@ -508,9 +513,10 @@ footer {
     background-color: var(--color-section);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 30px; /* Espacio entre el texto y el botón */    
+    gap: 30px; /* Espacio entre el texto y el botón */     
 }
 
 .cta h2 {
