@@ -49,19 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora };
 
-        // Guardar en LocalStorage
-        let citas = JSON.parse(localStorage.getItem("citas")) || [];
-        citas.push(formData);
-        localStorage.setItem("citas", JSON.stringify(citas));
-
-        // Enviar correo con EmailJS
+        // 🛠️ Guardar en LocalStorage solo después de confirmar el envío del correo
         emailjs.send("service_lsjni3j", "template_rpyxsfl", {
             name: formData.nombre,
             email: formData.correo // correo del destinatario            
         }, "De9vyTPv0M09Cuzo6") // Public Key
             .then(function (response) {
                 console.log("Correo enviado con éxito:", response);
-                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}. Se ha enviado un correo de confirmación.`);
+
+                // ✅ Guardar la cita solo si el correo se envió correctamente
+                let citas = JSON.parse(localStorage.getItem("citas")) || [];
+                citas.push({ fecha, hora });
+                localStorage.setItem("citas", JSON.stringify(citas));
+
+                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.Se ha enviado un correo de confirmación.`);
                 window.location.href = "index.html"; // Redirigir después del envío del correo
             })
             .catch(function (error) {

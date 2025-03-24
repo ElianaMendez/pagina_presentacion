@@ -6,26 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeSlotsContainer = document.getElementById('time-slots');
     const continueToFormBtn = document.getElementById('continue-to-form');
 
-    let appointments = []; // Lista de citas (puedes conectar a una base de datos si lo necesitas)
-    let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]; // Horarios disponibles
-    let selectedTime = ""; // Hora seleccionada
+    let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+    let selectedTime = ""; 
 
-    // Mostrar el calendario al hacer clic en el botón
-    openCalendarBtn.addEventListener('click', function() {
-        calendarContainer.classList.remove('hidden');
-    });
+    function getBookedAppointments() {
+        return JSON.parse(localStorage.getItem("citas")) || [];
+    }
 
-    // Cerrar el calendario
-    closeBtn.addEventListener('click', function() {
-        calendarContainer.classList.add('hidden');
-    });
-
-    // Generar horarios disponibles al seleccionar una fecha
     function generateTimeSlots() {
         timeSlotsContainer.innerHTML = "";
         let selectedDate = datePicker.value;
 
-        let bookedHours = appointments
+        let bookedHours = getBookedAppointments()
             .filter(appt => appt.fecha === selectedDate)
             .map(appt => appt.hora);
 
@@ -50,12 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Actualizar los horarios al cambiar la fecha
+    // Mostrar el calendario
+    openCalendarBtn.addEventListener('click', function() {
+        calendarContainer.classList.remove('hidden');
+    });
+
+    // Cerrar el calendario
+    closeBtn.addEventListener('click', function() {
+        calendarContainer.classList.add('hidden');
+    });
+
+    // Generar horarios al cambiar de fecha
     datePicker.addEventListener('change', function() {
         generateTimeSlots();
     });
 
-    // Redirigir a contacto.html con la fecha y hora seleccionadas
+    // Redirigir al formulario con la fecha y hora seleccionada
     continueToFormBtn.addEventListener('click', function() {
         let selectedDate = datePicker.value;
 
@@ -67,4 +69,3 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = `contacto.html?fecha=${selectedDate}&hora=${selectedTime}`;
     });
 });
-
