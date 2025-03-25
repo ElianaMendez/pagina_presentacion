@@ -8,16 +8,16 @@
 </head>
 <body>
     <h1>Panel de Administración</h1>
-    <div id="citas-lista"></div>
-    <button id="borrar-citas">Borrar Todas las Citas</button>
 
-    <script>
-        let password = prompt("Ingrese la contraseña de administrador:");
-        if (password !== "$AssUreT05*") {
-            alert("Acceso denegado");
-            window.location.href = "index.html";
-        }
-    </script>
+    <h2>Tu Cita</h2>
+    <div id="citas-lista"></div>
+
+    <h2>Modificar Cita</h2>
+    <input type="date" id="nueva-fecha">
+    <select id="nueva-hora"></select>
+    <button id="guardar-cambios">Guardar Cambios</button>
+
+    <button id="borrar-citas">Borrar Mi Cita</button>
 
     <script src="./scripts/admin.js"></script>
 </body>

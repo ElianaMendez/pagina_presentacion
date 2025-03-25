@@ -47,22 +47,29 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora };
+        // Función para generar una clave aleatoria de 6 caracteres
+        function generarClave() {
+        return Math.random().toString(36).slice(-6).toUpperCase();
+        }
 
+        const clave = generarClave(); // Generar clave única para la cita
+        const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora, clave };
+        
         // 🛠️ Guardar en LocalStorage solo después de confirmar el envío del correo
         emailjs.send("service_lsjni3j", "template_rpyxsfl", {
             name: formData.nombre,
-            email: formData.correo // correo del destinatario            
+            email: formData.correo, // correo del destinatario
+            clave: formData.clave            
         }, "De9vyTPv0M09Cuzo6") // Public Key
             .then(function (response) {
                 console.log("Correo enviado con éxito:", response);
 
-                // ✅ Guardar la cita solo si el correo se envió correctamente
+                // ✅ Guardar la cita en localStorage junto con la clave
                 let citas = JSON.parse(localStorage.getItem("citas")) || [];
-                citas.push({ fecha, hora });
+                citas.push(formData);
                 localStorage.setItem("citas", JSON.stringify(citas));
 
-                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.Se ha enviado un correo de confirmación.`);
+                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.Se ha enviado un correo de confirmación con tu clave: ${clave}`);
                 window.location.href = "index.html"; // Redirigir después del envío del correo
             })
             .catch(function (error) {
