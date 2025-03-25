@@ -1,73 +1,71 @@
-document.addEventListener("DOMContentLoaded", function () {
-    emailjs.init("De9vyTPv0M09Cuzo6"); // Se inicializa EmailJS con tu Public Key
+document.addEventListener('DOMContentLoaded', function() {
+    const openCalendarBtn = document.getElementById('open-calendar');
+    const calendarContainer = document.getElementById('calendar-container');
+    const closeBtn = document.querySelector('.close-btn');
+    const datePicker = document.getElementById('date-picker');
+    const timeSlotsContainer = document.getElementById('time-slots');
+    const continueToFormBtn = document.getElementById('continue-to-form');
 
-    const params = new URLSearchParams(window.location.search);
-    const fecha = params.get("fecha") || "No seleccionada";
-    const hora = params.get("hora") || "No seleccionada";
+    let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+    let selectedTime = ""; 
 
-    document.getElementById("selected-date").textContent = fecha;
-    document.getElementById("selected-time").textContent = hora;
+    function getBookedAppointments() {
+        return JSON.parse(localStorage.getItem("citas")) || [];
+    }
 
-    const form = document.getElementById("appointment-form");
+    function generateTimeSlots() {
+        timeSlotsContainer.innerHTML = "";
+        let selectedDate = datePicker.value;
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+        let bookedHours = getBookedAppointments()
+            .filter(appt => appt.fecha === selectedDate)
+            .map(appt => appt.hora);
 
-        // Obtener valores del formulario
-        const nombre = document.getElementById("nombre").value.trim();
-        const apellido = document.getElementById("apellido").value.trim();
-        const correo = document.getElementById("correo").value.trim();
-        const telefono = document.getElementById("telefono").value.trim();
-        const servicio = document.getElementById("servicio").value.trim();
-        const comentarios = document.getElementById("comentarios").value.trim();
+        availableHours.forEach(hour => {
+            let timeSlot = document.createElement("div");
+            timeSlot.classList.add("time-slot");
+            timeSlot.textContent = hour;
 
-        // Expresiones regulares para validaciones
-        const regexTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; // Solo letras y espacios
-        const regexTelefono = /^[0-9]{7,10}$/; // Solo números, mínimo 7 y máximo 10
+            if (bookedHours.includes(hour)) {
+                timeSlot.classList.add("disabled");
+                timeSlot.style.backgroundColor = "#ccc";
+                timeSlot.style.cursor = "not-allowed";
+            } else {
+                timeSlot.addEventListener("click", function() {
+                    document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
+                    timeSlot.classList.add("selected");
+                    selectedTime = hour;
+                });
+            }
 
-        // Validación de campos
-        if (!nombre || !regexTexto.test(nombre)) {
-            alert("Por favor, ingresa un nombre válido (solo letras y tildes).");
+            timeSlotsContainer.appendChild(timeSlot);
+        });
+    }
+
+    // Mostrar el calendario
+    openCalendarBtn.addEventListener('click', function() {
+        calendarContainer.classList.remove('hidden');
+    });
+
+    // Cerrar el calendario
+    closeBtn.addEventListener('click', function() {
+        calendarContainer.classList.add('hidden');
+    });
+
+    // Generar horarios al cambiar de fecha
+    datePicker.addEventListener('change', function() {
+        generateTimeSlots();
+    });
+
+    // Redirigir al formulario con la fecha y hora seleccionada
+    continueToFormBtn.addEventListener('click', function() {
+        let selectedDate = datePicker.value;
+
+        if (!selectedDate || !selectedTime) {
+            alert("Por favor, selecciona una fecha y una hora.");
             return;
         }
-        if (!apellido || !regexTexto.test(apellido)) {
-            alert("Por favor, ingresa un apellido válido (solo letras y tildes).");
-            return;
-        }
-        if (!correo || !correo.includes("@")) {
-            alert("Por favor, ingresa un correo válido.");
-            return;
-        }
-        if (!telefono || !regexTelefono.test(telefono)) {
-            alert("Por favor, ingresa un número de teléfono válido (7 a 10 dígitos numéricos).");
-            return;
-        }
-        if (!servicio) {
-            alert("Por favor, selecciona un servicio.");
-            return;
-        }
 
-        const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora };
-
-        // 🛠️ Guardar en LocalStorage solo después de confirmar el envío del correo
-        emailjs.send("service_lsjni3j", "template_rpyxsfl", {
-            name: formData.nombre,
-            email: formData.correo // correo del destinatario            
-        }, "De9vyTPv0M09Cuzo6") // Public Key
-            .then(function (response) {
-                console.log("Correo enviado con éxito:", response);
-
-                // ✅ Guardar la cita solo si el correo se envió correctamente
-                let citas = JSON.parse(localStorage.getItem("citas")) || [];
-                citas.push({ fecha, hora });
-                localStorage.setItem("citas", JSON.stringify(citas));
-
-                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.Se ha enviado un correo de confirmación.`);
-                window.location.href = "index.html"; // Redirigir después del envío del correo
-            })
-            .catch(function (error) {
-                console.error("Error al enviar el correo:", error);
-                alert("Hubo un error al enviar la confirmación por correo.");
-            });
+        window.location.href = `contacto.html?fecha=${selectedDate}&hora=${selectedTime}`;
     });
 });
