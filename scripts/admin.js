@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <input type="date" id="nueva-fecha-${cita.clave}" value="${cita.fecha}">
             <select id="nueva-hora-${cita.clave}"></select>
             <button onclick="guardarCambioCita('${cita.clave}')">Guardar Cambios</button>
-            <button onclick="borrarCita('${cita.clave}')">Cancelar</button>
+            <button onclick="borrarCita('${cita.clave}')" class="btn-cancelar">Cancelar cita</button>
             <hr>
         `;
 
@@ -69,16 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function cargarFechasYHorasDisponibles(clave) {
-        const citasAlmacenadas = JSON.parse(localStorage.getItem("citas")) || [];
-
         const nuevaFechaInput = document.getElementById(`nueva-fecha-${clave}`);
-        const selectHoras = document.getElementById(`nueva-hora-${clave}`);
-
-        if (!nuevaFechaInput || !selectHoras) return;
-
+        if (!nuevaFechaInput) return;
         nuevaFechaInput.addEventListener("change", () => actualizarHorasDisponibles(clave));
 
-        // ⚡ Llamamos a la función directamente para mostrar opciones al inicio
         actualizarHorasDisponibles(clave);
     }
 
@@ -92,18 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let nuevaFecha = nuevaFechaInput.value;
         selectHoras.innerHTML = "";
 
-        console.log(`⏳ Cargando horarios para la fecha: ${nuevaFecha}`);
-
         const todasLasHoras = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
-
-        // Obtener las horas ocupadas en la fecha seleccionada
         const horasOcupadas = citasAlmacenadas
             .filter(c => c.fecha === nuevaFecha && c.clave !== clave)
             .map(c => c.hora);
 
-        console.log(`📌 Horas ocupadas:`, horasOcupadas);
-
-        // Filtrar las horas disponibles
         const horasDisponibles = todasLasHoras.filter(hora => !horasOcupadas.includes(hora));
 
         if (horasDisponibles.length === 0) {
@@ -120,8 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectHoras.appendChild(option);
             });
         }
-
-        console.log(`✅ Horas disponibles:`, horasDisponibles);
     }
 
     window.guardarCambioCita = function (clave) {
@@ -148,17 +133,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert(`Tu cita ha sido actualizada con éxito.  
 Nueva fecha: ${nuevaFecha}  
-Nueva hora: ${nuevaHora}  
+Nueva hora: ${nuevaHora}
 
 Si necesitas revisarla nuevamente, usa el enlace del correo de confirmación e ingresa tu clave.`);
-        window.location.href = "index.html";
+
+        window.location.href = "index.html";  // 🔥 Redirige después de actualizar
     };
 
     window.borrarCita = function (clave) {
+        if (!confirm("¿Estás seguro de que quieres cancelar tu cita? Esta acción no se puede deshacer.")) {
+            return;
+        }
+
         let citas = JSON.parse(localStorage.getItem("citas")) || [];
         citas = citas.filter(c => c.clave !== clave);
         localStorage.setItem("citas", JSON.stringify(citas));
-        alert("La cita ha sido cancelada.");
-        window.location.reload();
+
+        alert("La cita ha sido cancelada con éxito.");
+        window.location.href = "index.html";  // 🔥 Redirige después de cancelar
     };
 });
