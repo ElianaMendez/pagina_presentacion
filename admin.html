@@ -9,15 +9,12 @@
 <body>
     <h1>Panel de Administración</h1>
 
-    <h2>Tu Cita</h2>
+    <h2 id="titulo-citas"></h2>
     <div id="citas-lista"></div>
 
-    <h2>Modificar Cita</h2>
-    <input type="date" id="nueva-fecha">
-    <select id="nueva-hora"></select>
-    <button id="guardar-cambios">Guardar Cambios</button>
-
-    <button id="borrar-citas">Borrar Mi Cita</button>
+    <div id="admin-actions" class="hidden">
+        <button id="borrar-todas-citas">Borrar Todas las Citas</button>
+    </div>
 
     <script src="./scripts/admin.js"></script>
 </body>

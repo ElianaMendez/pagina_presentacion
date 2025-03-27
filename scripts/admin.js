@@ -1,73 +1,144 @@
 document.addEventListener("DOMContentLoaded", function () {
     const citas = JSON.parse(localStorage.getItem("citas")) || [];
-    let claveIngresada = prompt("Ingrese su código de cita:");
+    let claveIngresada = prompt("Ingrese su código de cita o la clave de administrador:");
 
-    // Buscar la cita con la clave ingresada
-    const citaEncontrada = citas.find(cita => cita.clave === claveIngresada);
-
-    if (!citaEncontrada) {
-        alert("Clave incorrecta o cita no encontrada.");
-        window.location.href = "index.html";
-        return;
+    if (claveIngresada === "ADMIN123") {
+        mostrarTodasLasCitas();
+    } else {
+        mostrarCitaUsuario(claveIngresada);
     }
 
-    // Mostrar la cita encontrada
-    const citasContainer = document.getElementById("citas-lista");
-    citasContainer.innerHTML = `
-        <div>
-            <p><strong>Nombre:</strong> ${citaEncontrada.nombre} ${citaEncontrada.apellido}</p>
-            <p><strong>Correo:</strong> ${citaEncontrada.correo}</p>
-            <p><strong>Teléfono:</strong> ${citaEncontrada.telefono}</p>
-            <p><strong>Servicio:</strong> ${citaEncontrada.servicio}</p>
-            <p><strong>Fecha:</strong> <span id="fecha-actual">${citaEncontrada.fecha}</span></p>
-            <p><strong>Hora:</strong> <span id="hora-actual">${citaEncontrada.hora}</span></p>
-        </div>
-    `;
+    function mostrarTodasLasCitas() {
+        document.getElementById("titulo-citas").textContent = "Todas las Citas Agendadas";
+        document.getElementById("admin-actions").classList.remove("hidden");
 
-    document.getElementById("nueva-fecha").value = citaEncontrada.fecha;
-    cargarHorasDisponibles(citaEncontrada.fecha);
+        const citasContainer = document.getElementById("citas-lista");
+        citasContainer.innerHTML = citas.length === 0 ? "<p>No hay citas agendadas.</p>" : "";
 
-    document.getElementById("guardar-cambios").onclick = function () {
-        actualizarCita(citaEncontrada);
-    };
+        citas.forEach(cita => {
+            citasContainer.appendChild(crearTarjetaCita(cita, true));
+        });
 
-    document.getElementById("borrar-citas").onclick = function () {
-        if (confirm("¿Estás seguro de cancelar tu cita?")) {
-            let citasActualizadas = citas.filter(cita => cita.clave !== claveIngresada);
-            localStorage.setItem("citas", JSON.stringify(citasActualizadas));
-            alert("Tu cita ha sido cancelada.");
-            window.location.href = "index.html"; // 🔄 Redirigir al Index después de cancelar
-        }
-    };
-
-    function cargarHorasDisponibles(fechaSeleccionada) {
-        const selectHoras = document.getElementById("nueva-hora");
-        selectHoras.innerHTML = "";
-
-        const horasDisponibles = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
-        const horasOcupadas = citas.filter(cita => cita.fecha === fechaSeleccionada).map(cita => cita.hora);
-
-        horasDisponibles.forEach(hora => {
-            if (!horasOcupadas.includes(hora) || hora === citaEncontrada.hora) {
-                let option = document.createElement("option");
-                option.value = hora;
-                option.textContent = hora;
-                selectHoras.appendChild(option);
+        document.getElementById("borrar-todas-citas").addEventListener("click", function () {
+            if (confirm("¿Estás seguro de borrar todas las citas?")) {
+                localStorage.removeItem("citas");
+                alert("Todas las citas han sido eliminadas.");
+                window.location.href = "index.html";
             }
         });
     }
 
-    function actualizarCita(cita) {
-        const nuevaFecha = document.getElementById("nueva-fecha").value;
-        const nuevaHora = document.getElementById("nueva-hora").value;
+    function mostrarCitaUsuario(claveIngresada) {
+        const citaEncontrada = citas.find(cita => cita.clave === claveIngresada);
+
+        if (!citaEncontrada) {
+            alert("Clave incorrecta o cita no encontrada.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        document.getElementById("titulo-citas").textContent = "Tu Cita";
+
+        const citasContainer = document.getElementById("citas-lista");
+        citasContainer.appendChild(crearTarjetaCita(citaEncontrada, false));
+    }
+
+    function crearTarjetaCita(cita, esAdmin) {
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("cita-card");
+
+        tarjeta.innerHTML = `
+            <p><strong>Nombre:</strong> ${cita.nombre} ${cita.apellido}</p>
+            <p><strong>Correo:</strong> ${cita.correo}</p>
+            <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+            <p><strong>Servicio:</strong> ${cita.servicio}</p>
+            <p><strong>Fecha:</strong> <span>${cita.fecha}</span></p>
+            <p><strong>Hora:</strong> <span>${cita.hora}</span></p>
+            ${esAdmin ? `<p><strong>Clave de Modificación:</strong> ${cita.clave}</p>` : ""}
+            <h3>Reagendar Cita</h3>
+            <input type="date" id="nueva-fecha-${cita.clave}" value="${cita.fecha}">
+            <select id="nueva-hora-${cita.clave}"></select>
+            <button onclick="guardarCambioCita('${cita.clave}')">Guardar Cambios</button>
+            <button onclick="borrarCita('${cita.clave}')">Cancelar</button>
+            <hr>
+        `;
+
+        setTimeout(() => cargarFechasYHorasDisponibles(cita.clave), 100);
+
+        return tarjeta;
+    }
+
+    function cargarFechasYHorasDisponibles(clave) {
+        const citasAlmacenadas = JSON.parse(localStorage.getItem("citas")) || [];
+
+        const nuevaFechaInput = document.getElementById(`nueva-fecha-${clave}`);
+        const selectHoras = document.getElementById(`nueva-hora-${clave}`);
+
+        if (!nuevaFechaInput || !selectHoras) return;
+
+        nuevaFechaInput.addEventListener("change", () => actualizarHorasDisponibles(clave));
+
+        // ⚡ Llamamos a la función directamente para mostrar opciones al inicio
+        actualizarHorasDisponibles(clave);
+    }
+
+    function actualizarHorasDisponibles(clave) {
+        const citasAlmacenadas = JSON.parse(localStorage.getItem("citas")) || [];
+        const nuevaFechaInput = document.getElementById(`nueva-fecha-${clave}`);
+        const selectHoras = document.getElementById(`nueva-hora-${clave}`);
+
+        if (!nuevaFechaInput || !selectHoras) return;
+
+        let nuevaFecha = nuevaFechaInput.value;
+        selectHoras.innerHTML = "";
+
+        console.log(`⏳ Cargando horarios para la fecha: ${nuevaFecha}`);
+
+        const todasLasHoras = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+
+        // Obtener las horas ocupadas en la fecha seleccionada
+        const horasOcupadas = citasAlmacenadas
+            .filter(c => c.fecha === nuevaFecha && c.clave !== clave)
+            .map(c => c.hora);
+
+        console.log(`📌 Horas ocupadas:`, horasOcupadas);
+
+        // Filtrar las horas disponibles
+        const horasDisponibles = todasLasHoras.filter(hora => !horasOcupadas.includes(hora));
+
+        if (horasDisponibles.length === 0) {
+            let option = document.createElement("option");
+            option.value = "";
+            option.textContent = "No hay horarios disponibles";
+            option.disabled = true;
+            selectHoras.appendChild(option);
+        } else {
+            horasDisponibles.forEach(hora => {
+                let option = document.createElement("option");
+                option.value = hora;
+                option.textContent = hora;
+                selectHoras.appendChild(option);
+            });
+        }
+
+        console.log(`✅ Horas disponibles:`, horasDisponibles);
+    }
+
+    window.guardarCambioCita = function (clave) {
+        let citas = JSON.parse(localStorage.getItem("citas")) || [];
+        const cita = citas.find(c => c.clave === clave);
+        if (!cita) return;
+
+        const nuevaFecha = document.getElementById(`nueva-fecha-${clave}`).value;
+        const nuevaHora = document.getElementById(`nueva-hora-${clave}`).value;
 
         if (!nuevaFecha || !nuevaHora) {
             alert("Selecciona una nueva fecha y hora.");
             return;
         }
 
-        if (citas.some(c => c.fecha === nuevaFecha && c.hora === nuevaHora && c.clave !== cita.clave)) {
-            alert("Esa hora ya está ocupada.");
+        if (citas.some(c => c.fecha === nuevaFecha && c.hora === nuevaHora && c.clave !== clave)) {
+            alert("Esa hora ya está ocupada. Por favor, elige otro horario.");
             return;
         }
 
@@ -79,8 +150,15 @@ document.addEventListener("DOMContentLoaded", function () {
 Nueva fecha: ${nuevaFecha}  
 Nueva hora: ${nuevaHora}  
 
-Si deseas revisar tu cita nuevamente o hacer otro cambio, ingresa al enlace del correo de confirmación y usa tu clave proporcionada anteriormente.`);
+Si necesitas revisarla nuevamente, usa el enlace del correo de confirmación e ingresa tu clave.`);
+        window.location.href = "index.html";
+    };
 
-        window.location.href = "index.html"; // 🔄 Redirigir al Index después de actualizar
-    }
+    window.borrarCita = function (clave) {
+        let citas = JSON.parse(localStorage.getItem("citas")) || [];
+        citas = citas.filter(c => c.clave !== clave);
+        localStorage.setItem("citas", JSON.stringify(citas));
+        alert("La cita ha sido cancelada.");
+        window.location.reload();
+    };
 });
