@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const tarjeta = document.createElement("div");
         tarjeta.classList.add("cita-card");
 
+        const fechaMinima = obtenerFechaMinima();
+
         tarjeta.innerHTML = `
             <p><strong>Nombre:</strong> ${cita.nombre} ${cita.apellido}</p>
             <p><strong>Correo:</strong> ${cita.correo}</p>
@@ -56,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p><strong>Hora:</strong> <span>${cita.hora}</span></p>
             ${esAdmin ? `<p><strong>Clave de Modificación:</strong> ${cita.clave}</p>` : ""}
             <h3>Reagendar Cita</h3>
-            <input type="date" id="nueva-fecha-${cita.clave}" value="${cita.fecha}">
+            <input type="date" id="nueva-fecha-${cita.clave}" value="${cita.fecha}" min="${fechaMinima}">
             <select id="nueva-hora-${cita.clave}"></select>
             <button onclick="guardarCambioCita('${cita.clave}')">Guardar Cambios</button>
             <button onclick="borrarCita('${cita.clave}')" class="btn-cancelar">Cancelar cita</button>
@@ -66,6 +68,17 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => cargarFechasYHorasDisponibles(cita.clave), 100);
 
         return tarjeta;
+    }
+
+    function obtenerFechaMinima() {
+        let fechaHoy = new Date();
+        fechaHoy.setDate(fechaHoy.getDate() + 1); // 📅 Agregar un día (mañana)
+
+        let year = fechaHoy.getFullYear();
+        let month = String(fechaHoy.getMonth() + 1).padStart(2, "0"); // Mes con dos dígitos
+        let day = String(fechaHoy.getDate()).padStart(2, "0"); // Día con dos dígitos
+
+        return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
     }
 
     function cargarFechasYHorasDisponibles(clave) {
@@ -134,8 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Tu cita ha sido actualizada con éxito.  
 Nueva fecha: ${nuevaFecha}  
 Nueva hora: ${nuevaHora}
-
-Si necesitas revisarla nuevamente, usa el enlace del correo de confirmación e ingresa tu clave.`);
+Si deseas revisar tu cita nuevamente o hacer otro cambio, ingresa al enlace del correo de confirmación y usa tu clave proporcionada anteriormente.`);
 
         window.location.href = "index.html";  // 🔥 Redirige después de actualizar
     };
