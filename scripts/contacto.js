@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    emailjs.init("De9vyTPv0M09Cuzo6"); // Se inicializa EmailJS con tu Public Key
-
     const params = new URLSearchParams(window.location.search);
     const fecha = params.get("fecha") || "No seleccionada";
     const hora = params.get("hora") || "No seleccionada";
@@ -10,10 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("appointment-form");
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        // Obtener valores del formulario
         const nombre = document.getElementById("nombre").value.trim();
         const apellido = document.getElementById("apellido").value.trim();
         const correo = document.getElementById("correo").value.trim();
@@ -21,25 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const servicio = document.getElementById("servicio").value.trim();
         const comentarios = document.getElementById("comentarios").value.trim();
 
-        // Expresiones regulares para validaciones
-        const regexTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; // Solo letras y espacios
-        const regexTelefono = /^[0-9]{7,10}$/; // Solo números, mínimo 7 y máximo 10
+        const regexTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+        const regexTelefono = /^[0-9]{7,10}$/;
 
-        // Validación de campos
         if (!nombre || !regexTexto.test(nombre)) {
-            alert("Por favor, ingresa un nombre válido (solo letras y tildes).");
+            alert("Por favor, ingresa un nombre válido.");
             return;
         }
         if (!apellido || !regexTexto.test(apellido)) {
-            alert("Por favor, ingresa un apellido válido (solo letras y tildes).");
+            alert("Por favor, ingresa un apellido válido.");
             return;
         }
-        if (!correo || !correo.includes("@")) {
+        if (!correo.includes("@")) {
             alert("Por favor, ingresa un correo válido.");
             return;
         }
         if (!telefono || !regexTelefono.test(telefono)) {
-            alert("Por favor, ingresa un número de teléfono válido (7 a 10 dígitos numéricos).");
+            alert("Por favor, ingresa un número de teléfono válido.");
             return;
         }
         if (!servicio) {
@@ -47,34 +42,42 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Función para generar una clave aleatoria de 6 caracteres
         function generarClave() {
-        return Math.random().toString(36).slice(-6).toUpperCase();
+            return Math.random().toString(36).slice(-6).toUpperCase();
         }
 
-        const clave = generarClave(); // Generar clave única para la cita
-        const formData = { nombre, apellido, correo, telefono, servicio, comentarios, fecha, hora, clave };
-        
-        // 🛠️ Guardar en LocalStorage solo después de confirmar el envío del correo
-        emailjs.send("service_lsjni3j", "template_rpyxsfl", {
-            name: formData.nombre,
-            email: formData.correo, // correo del destinatario
-            clave: formData.clave            
-        }, "De9vyTPv0M09Cuzo6") // Public Key
-            .then(function (response) {
-                console.log("Correo enviado con éxito:", response);
+        const clave = generarClave();
+        const formData = {
+            nombre, apellido, correo, telefono,
+            servicio, comentarios, fecha, hora, clave
+        };
 
-                // ✅ Guardar la cita en localStorage junto con la clave
-                let citas = JSON.parse(localStorage.getItem("citas")) || [];
-                citas.push(formData);
-                localStorage.setItem("citas", JSON.stringify(citas));
+        // 💡 Mostrar feedback visual en el botón
+        const btn = form.querySelector("button");
+        btn.disabled = true;
+        btn.textContent = "Enviando...";
 
-                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}.Se ha enviado un correo de confirmación con tu clave: ${clave}`);
-                window.location.href = "index.html"; // Redirigir después del envío del correo
-            })
-            .catch(function (error) {
-                console.error("Error al enviar el correo:", error);
-                alert("Hubo un error al enviar la confirmación por correo.");
+        try {
+            const response = await fetch("/enviar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
             });
+
+            if (response.ok) {
+                alert(`Tu cita ha sido agendada para el ${fecha} a las ${hora}. Se ha enviado un correo de confirmación con tu clave: ${clave}`);
+                window.location.href = "index.html";
+            } else {
+                const error = await response.json();
+                alert("Error al guardar la cita: " + error.mensaje);
+            }
+        } catch (error) {
+            console.error("Error al enviar datos:", error);
+            alert("Ocurrió un error al enviar tu solicitud.");
+        } finally {
+            // ✅ Restaurar botón
+            btn.disabled = false;
+            btn.textContent = "Agendar una cita";
+        }
     });
 });
