@@ -3,6 +3,7 @@ import json
 import os
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from urllib.parse import urlparse, parse_qs
 from secrets import token_hex
 
@@ -150,20 +151,36 @@ class MiServidor(SimpleHTTPRequestHandler):
         contraseña = "ewio sggr lasw atde"
 
         asunto = "Confirmación de cita"
-        cuerpo = f"""
-Hola {nombre},
+        url_panel = f"http://localhost:{PUERTO}/admin.html?clave={clave}"
 
-Tu cita ha sido registrada exitosamente para el día {fecha} a las {hora}.
+        mensaje_html = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; color: #333;">
+            <h2>¡Hola {nombre}!</h2>
+            <p>Tu cita ha sido registrada exitosamente para el:</p>
+            <ul>
+                <li><strong>📅 Fecha:</strong> {fecha}</li>
+                <li><strong>⏰ Hora:</strong> {hora}</li>
+            </ul>
+            <p><strong>🔑 Tu clave de acceso:</strong> {clave}</p>
+            <p>Puedes gestionar tu cita (consultar, reagendar o cancelar) haciendo clic en el siguiente botón:</p>
+            <p>
+                <a href="{url_panel}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+                    Gestionar mi cita
+                </a>
+            </p>
+            <p>Gracias por agendar con nosotros.</p>
+        </body>
+        </html>
+        """
 
-Tu clave de confirmación es: {clave} ✅
-
-Gracias por agendar con nosotros.
-"""
-
-        msg = MIMEText(cuerpo)
+        # Mensaje multiparte: HTML + texto plano (opcional si deseas)
+        msg = MIMEMultipart("alternative")
         msg["Subject"] = asunto
         msg["From"] = remitente
         msg["To"] = destinatario
+
+        msg.attach(MIMEText(mensaje_html, "html"))
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as servidor:

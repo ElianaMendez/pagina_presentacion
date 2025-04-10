@@ -1,44 +1,67 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const claveIngresada = prompt("Ingrese su código de cita o la clave de administrador:");
-    const esAdmin = claveIngresada === "ADMIN123";
+    const params = new URLSearchParams(window.location.search);
+    let claveIngresada = params.get("clave");
+
+    const loginBox = document.getElementById("clave-login");
     const titulo = document.getElementById("titulo-citas");
     const contenedor = document.getElementById("citas-lista");
 
-    fetch(`/citas?key=${claveIngresada}`)
-        .then(res => res.json())
-        .then(citas => {
-            if (citas.error || citas.length === 0) {
-                alert("Clave incorrecta o cita no encontrada.");
-                window.location.href = "index.html";
-                return;
+    if (claveIngresada) {
+        loginBox.style.display = "none";
+        procesarClave(claveIngresada);
+    } else {
+        loginBox.style.display = "block";
+        document.getElementById("btn-ingresar").addEventListener("click", () => {
+            const input = document.getElementById("clave-input").value.trim();
+            if (input) {
+                claveIngresada = input;
+                loginBox.style.display = "none";
+                procesarClave(claveIngresada);
             }
-
-            if (esAdmin) {
-                titulo.textContent = "Todas las Citas Agendadas";
-                document.getElementById("admin-actions").classList.remove("hidden");
-
-                citas.forEach(cita => {
-                    contenedor.appendChild(crearTarjetaCita(cita, true));
-                });
-
-                document.getElementById("borrar-todas-citas").addEventListener("click", async () => {
-                    if (confirm("¿Estás seguro de borrar todas las citas?")) {
-                        const res = await fetch(`/borrar-todo?key=ADMIN123`);
-                        const data = await res.json();
-                        alert(data.mensaje || "Citas borradas.");
-                        window.location.href = "index.html";
-                    }
-                });
-            } else {
-                titulo.textContent = "Tu Cita";
-                contenedor.appendChild(crearTarjetaCita(citas[0], false));
-            }
-        })
-        .catch(err => {
-            console.error("Error al consultar citas:", err);
-            alert("Ocurrió un error al consultar las citas.");
-            window.location.href = "index.html";
         });
+    }
+
+    function procesarClave(clave) {
+        const esAdmin = clave === "ADMIN123";
+
+        fetch(`/citas?key=${clave}`)
+            .then(res => res.json())
+            .then(citas => {
+                if (citas.error || citas.length === 0) {
+                    alert("Clave incorrecta o cita no encontrada.");
+                    window.location.href = "index.html";
+                    return;
+                }
+
+                titulo.style.display = "block";
+
+                if (esAdmin) {
+                    titulo.textContent = "Todas las Citas Agendadas";
+                    document.getElementById("admin-actions").classList.remove("hidden");
+
+                    citas.forEach(cita => {
+                        contenedor.appendChild(crearTarjetaCita(cita, true));
+                    });
+
+                    document.getElementById("borrar-todas-citas").addEventListener("click", async () => {
+                        if (confirm("¿Estás seguro de borrar todas las citas?")) {
+                            const res = await fetch(`/borrar-todo?key=ADMIN123`);
+                            const data = await res.json();
+                            alert(data.mensaje || "Citas borradas.");
+                            window.location.href = "index.html";
+                        }
+                    });
+                } else {
+                    titulo.textContent = "Tu Cita";
+                    contenedor.appendChild(crearTarjetaCita(citas[0], false));
+                }
+            })
+            .catch(err => {
+                console.error("Error al consultar citas:", err);
+                alert("Ocurrió un error al consultar las citas.");
+                window.location.href = "index.html";
+            });
+    }
 
     function crearTarjetaCita(cita, esAdmin) {
         const tarjeta = document.createElement("div");
