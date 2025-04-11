@@ -42,5 +42,38 @@
         "fecha": "2025-04-30",
         "hora": "14:00",
         "clave": "8O5ZUQ"
+    },
+    {
+        "nombre": "Valentina",
+        "apellido": "Franco",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "automatizacion",
+        "comentarios": "fdfgdsg",
+        "fecha": "2025-05-01",
+        "hora": "11:00",
+        "clave": "6EJWAH"
+    },
+    {
+        "nombre": "Eliana Margarita",
+        "apellido": "Méndez Marrugo",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "automatizacion",
+        "comentarios": "gfsdgfsdh",
+        "fecha": "2025-04-28",
+        "hora": "09:00",
+        "clave": "OBVYK7"
+    },
+    {
+        "nombre": "Eliana Margarita",
+        "apellido": "Méndez Marrugo",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "automatizacion",
+        "comentarios": "",
+        "fecha": "2025-04-24",
+        "hora": "09:00",
+        "clave": "XLGCFA"
     }
 ]

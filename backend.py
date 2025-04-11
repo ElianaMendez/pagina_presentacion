@@ -165,7 +165,7 @@ class MiServidor(SimpleHTTPRequestHandler):
             <p><strong>🔑 Tu clave de acceso:</strong> {clave}</p>
             <p>Puedes gestionar tu cita (consultar, reagendar o cancelar) haciendo clic en el siguiente botón:</p>
             <p>
-                <a href="{url_panel}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+                <a href="{url_panel}" style="display: inline-block; padding: 10px 20px; background-color: #DF9755; color: white; text-decoration: none; border-radius: 5px;">
                     Gestionar mi cita
                 </a>
             </p>
