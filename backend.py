@@ -9,7 +9,7 @@ from secrets import token_hex
 
 ARCHIVO = "citas.json"
 ADMIN_KEY = "ADMIN123"
-PUERTO = 8009
+PUERTO = 8010
 
 
 class MiServidor(SimpleHTTPRequestHandler):
