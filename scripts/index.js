@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
     let selectedTime = "";
 
-    function getBookedAppointments() {
-        return JSON.parse(localStorage.getItem("citas")) || [];
+    async function getBookedAppointmentsFromServer() {
+        const res = await fetch("/citas?key=ADMIN123");
+        return await res.json();
     }
 
     function obtenerFechaMinima() {
@@ -24,11 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
     }
 
-    function generateTimeSlots() {
+    async function generateTimeSlots() {
         timeSlotsContainer.innerHTML = "";
         let selectedDate = datePicker.value;
 
-        let bookedHours = getBookedAppointments()
+        const allCitas = await getBookedAppointmentsFromServer();
+
+        let bookedHours = allCitas
             .filter(appt => appt.fecha === selectedDate)
             .map(appt => appt.hora);
 
@@ -41,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 timeSlot.classList.add("disabled");
                 timeSlot.style.backgroundColor = "#ccc";
                 timeSlot.style.cursor = "not-allowed";
+                timeSlot.style.pointerEvents = "none";
+                timeSlot.title = "Horario ocupado";
             } else {
                 timeSlot.addEventListener("click", function () {
                     document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
