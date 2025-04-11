@@ -1,1 +1,46 @@
-[]
+[
+    {
+        "nombre": "Eliana Margarita",
+        "apellido": "Méndez Marrugo",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "automatizacion",
+        "comentarios": "dsfdsgf",
+        "fecha": "2025-04-29",
+        "hora": "15:00",
+        "clave": "PZCJ3S"
+    },
+    {
+        "nombre": "Alejandro",
+        "apellido": "Franco",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "qa_qc",
+        "comentarios": "dasfsdf",
+        "fecha": "2025-04-30",
+        "hora": "16:00",
+        "clave": "EZCRBC"
+    },
+    {
+        "nombre": "Eliana Margarita",
+        "apellido": "Méndez Marrugo",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "qa_qc",
+        "comentarios": "dfsdfdsgd",
+        "fecha": "2025-04-28",
+        "hora": "15:00",
+        "clave": "EJJU7F"
+    },
+    {
+        "nombre": "Estefanía",
+        "apellido": "Franco",
+        "correo": "eliamargi@gmail.com",
+        "telefono": "3017500584",
+        "servicio": "automatizacion",
+        "comentarios": "fwrgrgher",
+        "fecha": "2025-04-30",
+        "hora": "14:00",
+        "clave": "8O5ZUQ"
+    }
+]

@@ -54,6 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     titulo.textContent = "Tu Cita";
                     contenedor.appendChild(crearTarjetaCita(citas[0], false));
+
+                    // Asegurar que no se vea el botón admin
+                    document.getElementById("admin-actions").classList.add("hidden");
                 }
             })
             .catch(err => {
